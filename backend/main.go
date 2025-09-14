@@ -2,16 +2,22 @@ package main
 
 import (
 	"backend/routes"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-    r := gin.Default()
+	if err := godotenv.Load(); err != nil {
+		log.Println("Error loading .env file:", err)
+	}
 
-    // Setup routes
-    routes.SetupRoutes(r)
+	r := gin.Default()
 
-    // Start the server
-    r.Run(":8080") // listen and serve on localhost:8080
+	// Setup routes
+	routes.SetupRoutes(r)
+
+	// Start the server
+	r.Run(":8080") // listen and serve on localhost:8080
 }
